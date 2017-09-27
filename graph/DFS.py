@@ -1,8 +1,13 @@
 class Vertex:
-    def __init__(self,start_time=0,end_time=0):
+    def __init__(self,start_time=0,end_time=0,status=0,index=0,group=0):
         self.start_time=start_time
         self.end_time=end_time
-        self.status=0
+        self.status=status
+        self.index=index
+        self.group=group
+    def reset(self):
+        self.start_time=self.end_time=self.status=self.group=0
+
 class MaTranKe:
     def __init__(self,width,height):
         self.width=width
@@ -36,6 +41,13 @@ def run(mang_vertex,matran,index,cur_time):
     mang_vertex[index].end_time=cur_time
     return cur_time
 
+def reverse_matrix(matran):
+    for i in range(matran.height):
+        for j in range(i+1,matran.width):
+            temp = matran.Arr[i][j]
+            matran.Arr[i][j]=matran.Arr[j][i]
+            matran.Arr[j][i]=temp
+
 def prog():
     arr = init('C:\\Users\\phamh\\Documents\\GitHub\\algorithm_pttkgt\\input.txt')
     mang_vertex = [Vertex() for i in range(arr.height)]
@@ -43,4 +55,4 @@ def prog():
     for i in range(len(mang_vertex)):
         print "dinh %d: %d %d" % (i+1,mang_vertex[i].start_time,mang_vertex[i].end_time)
 
-prog()
+#prog()
